@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class ItemController extends Controller {
 	public function index () {
-		$num = 1;
-		dd($num);
+		$var = 555;
+		return view('index')->with(['var' => $var]);
 	}
 }
