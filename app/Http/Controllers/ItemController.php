@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 class ItemController extends Controller {
 	public function index () {
+		$num = 1;
+		dd($num);
 		$items = DB::table('items')->get();
 		return view('items.index', ['items' => $items]);
 	}
