@@ -3,7 +3,7 @@
 Route::get('/', 'ItemController@index');
 Route::get('/detail/{id}', 'ItemController@detail')->name('items.item_name');
 
-/*Route::group(['prefix' => 'admin'], function() {
+Route::group(['prefix' => 'admin'], function() {
 	Route::get('/',         function () { return redirect('/admins/home'); });
 	//Route::get('/login',     'Admin\LoginController@LoginForm')->name('admins.login');
 	Route::post('/login',    'Admin\LoginController@login');
