@@ -1,7 +1,25 @@
 @extends('layouts.app_admin')
+
 @section('content')
-<h1>商品一覧</h1>
+<div class="container">
+<div class="row">
+<div class="col-md-8 col-md-offset-2">
+<div class="panel panel-default">
+<div class="panel-heading">商品一覧</div>
+<div class="panel-body">
+@if (session('status'))
+	<div class="alert alert-success">
+	{{ session('status') }}
+	</div>
+@endif
+<!-- フラッシュメッセージ -->
+@if (session('add_message'))
+	<div class="flash_message">
+	{{ session('add_message') }}
+	</div>
+@endif
 <table border='2'>
+<a href="{{ route('items.update') }}">商品追加</a>
 <tr>
 <td>商品</td>
 <td>値段</td>
@@ -10,17 +28,22 @@
 @foreach ($items as $item)
 	<tr>
 	<td>
-	<a href="{{ route('items.item_name', ['id' => $item->id]) }}">{{ $item->item_name }}</a>
+	<a href="{{ route('items.name', ['id' => $item->id]) }}">{{ $item->name }}</a>
 	</td>
-	<td>{{ $item->item_price }}</td>
+	<td>{{ $item->price }}</td>
 	<td>
-	@if ($item->item_stock == 0)
+	@if ($item->stock == 0)
 		在庫なし
-	@elseif ($item->item_stock >= 1)
+	@elseif ($item->stock >= 1)
 		在庫あり
 	@endif
 	</td>
 	</tr>
 @endforeach
-
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 @endsection

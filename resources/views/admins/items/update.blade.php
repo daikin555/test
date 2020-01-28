@@ -1,26 +1,42 @@
 @extends('layouts.app_admin')
+
 @section('content')
-<h1>商品一覧</h1>
-<table border='2'>
-<tr>
-<td>商品</td>
-<td>値段</td>
-<td>在庫</td>
-</tr>
-@foreach ($items as $item)
-	<tr>
-	<td>
-	<a href="{{ route('items.item_name', ['id' => $item->id]) }}">{{ $item->item_name }}</a>
-	</td>
-	<td>{{ $item->item_price }}</td>
-	<td>
-	@if ($item->item_stock == 0)
-		在庫なし
-	@elseif ($item->item_stock >= 1)
-		在庫あり
-	@endif
-	</td>
-	</tr>
-@endforeach
+<div class="container">
+<div class="row">
+<div class="col-md-8 col-md-offset-2">
+<div class="panel panel-default">
+<div class="panel-heading">商品追加</div>
+<div class="panel-body">
+@if (session('status'))
+	<div class="alert alert-success">
+	{{ session('status') }}
+	</div>
+@endif
+
+<a href="{{ route('items.index') }}">商品一覧へ</a>
+<br>
+{{ Form::open(['route' => 'items.add']) }}
+<br>
+商品名：
+{{ Form::text('name') }}
+<br>
+商品説明
+<br>
+{{ Form::textarea('descrip') }}
+<br>
+<p>在庫数：
+{{ Form::text('stock') }}
+</p>
+<p>
+値段：
+{{ Form::text('price') }}
+</p>
+{{ Form::submit('商品追加') }}
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 @endsection

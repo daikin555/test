@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app_admin')
 
 @section('content')
 <div class="container">
@@ -6,9 +6,9 @@
 <div class="col-md-8 col-md-offset-2">
 <div class="panel panel-default">
 <div class="panel-heading">商品一覧</div>
-
 <div class="panel-body">
 <table border='2'>
+<a href="{{ route('items.update') }}">商品追加</a>
 <tr>
 <td>商品</td>
 <td>値段</td>
@@ -17,7 +17,7 @@
 @foreach ($items as $item)
 	<tr>
 	<td>
-	<a href="{{ route('item.name', ['id' => $item->id]) }}">{{ $item->name }}</a>
+	<a href="{{ route('items.name', ['id' => $item->id]) }}">{{ $item->name }}</a>
 	</td>
 	<td>{{ $item->price }}</td>
 	<td>
