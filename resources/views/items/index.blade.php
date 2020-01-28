@@ -15,13 +15,13 @@
 @foreach ($items as $item)
 	<tr>
 	<td>
-	<a href="{{ route('items.item_name', ['id' => $item->id]) }}">{{ $item->item_name }}</a>
+	<a href="{{ route('item.name', ['id' => $item->id]) }}">{{ $item->name }}</a>
 	</td>
-	<td>{{ $item->item_price }}</td>
+	<td>{{ $item->price }}</td>
 	<td>
-	@if ($item->item_stock == 0)
+	@if ($item->stock == 0)
 		在庫なし
-	@elseif ($item->item_stock >= 1)
+	@elseif ($item->stock >= 1)
 		在庫あり
 	@endif
 	</td>

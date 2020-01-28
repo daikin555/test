@@ -6,8 +6,12 @@ use Illuminate\Http\Request;
 
 class ItemController extends Controller {
 	public function index () {
-		$var = 1;
-		return view('item.index', ['var' => $var]);
+		$items = DB::table('items')->get();
+		return view('items.index', compact('items'));
+	}
+	public function detail(Request $request, $id) {
+		$item = DB::table('items')->where('id', '=', $id)->get();
+		return view('items.detail', compact('item'));
 	}
 
 }

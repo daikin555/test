@@ -1,7 +1,7 @@
 <?php
 
-Route::get('/item/index', 'ItemController@index');
-Route::get('/detail/{id}', 'ItemController@detail')->name('items.item_name');
+Route::get('/index', 'ItemController@index');
+Route::get('/detail/{id}', 'ItemController@detail')->name('item.name');
 
 /*Route::group(['prefix' => 'admin'], function() {
 	Route::get('/',         function () { return redirect('/admins/home'); });
