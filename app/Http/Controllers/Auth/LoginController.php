@@ -16,12 +16,12 @@ class LoginController extends Controller
 
 	public function __construct()
 	{
-		$this->middleware('guest')->except('logout');
+		$this->middleware('guest:user')->except('logout');
 	}
 
 	public function logout(Request $request) {
-		auth()->logout();
-		$request->session()->flush();
+		$this->guard('user')->logout();
+		//$request->session()->flush();
 		$request->session()->regenerate();
 		return redirect()->route('home');
 	}

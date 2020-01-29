@@ -14,25 +14,21 @@ class LoginController extends Controller
 
 	protected $redirectTo = '/admin/home';
 
-	public function __construct()
-	{
+	public function __construct() {
 		$this->middleware('guest:admin')->except('logout');
 	}
 
-	public function indexLoginForm()
-	{
+	public function indexLoginForm() {
 		return view('admins.login');
 	}
 
-	protected function guard()
-	{
+	protected function guard() {
 		return Auth::guard('admin');
 	}
 
-	public function logout(Request $request)
-	{
+	public function logout(Request $request) {
 		Auth::guard('admin')->logout();
-		$request->session()->flush();
+		//$request->session()->flush();
 		$request->session()->regenerate();
 
 		return redirect('/admin/login');
