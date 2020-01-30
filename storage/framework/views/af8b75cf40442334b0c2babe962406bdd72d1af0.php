@@ -7,16 +7,20 @@
 
 <div class="panel-body">
 商品名<br>
-<?php echo e($item[0]->name); ?><br>
+<?php echo e($item->name); ?><br>
 商品説明<br>
-<?php echo e($item[0]->descrip); ?><br>
+<?php echo e($item->descrip); ?><br>
 価格<br>
-<?php echo e($item[0]->price); ?>円<br>
+<?php echo e($item->price); ?>円<br>
 在庫の有無<br>
-<?php if($item[0]->stock == 0): ?>
+<?php if($item->stock == 0): ?>
 	在庫なし
 <?php else: ?>
-	在庫あり
+	在庫あり<br>
+	<?php echo e(Form::open('route' => 'cart.index')); ?>
+
+	<?php echo e(Form::button('カートに入れる')); ?>
+
 <?php endif; ?>
 <br>
 <a href="<?php echo e(route('item.index')); ?>">商品一覧へ</a>
