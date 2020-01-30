@@ -6,6 +6,14 @@
 <div class="panel-heading">商品詳細</div>
 
 <div class="panel-body">
+<!-- フラッシュメッセージ -->
+<?php if(session('add_message')): ?>
+	<div class="flash_message">
+	<?php echo e(session('add_message')); ?>
+
+	</div>
+<?php endif; ?>
+<br>
 商品名<br>
 <?php echo e($item->name); ?><br>
 商品説明<br>
@@ -17,9 +25,7 @@
 	在庫なし
 <?php else: ?>
 	在庫あり<br>
-	<?php echo e(Form::open(['route' => 'cart.index'])); ?>
-
-	<a href="<?php echo e(route('cart.index')); ?>"><?php echo e(Form::button('カートに入れる')); ?></a>
+	<a href="<?php echo e(route('cart.add')); ?>"><?php echo e(Form::button('カートに入れる')); ?></a>
 <?php endif; ?>
 <br>
 <a href="<?php echo e(route('item.index')); ?>">商品一覧へ</a>

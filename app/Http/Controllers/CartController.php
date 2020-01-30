@@ -32,12 +32,12 @@ class CartController extends Controller {
 		$item_id = session('id');
 		if (isset($item_id)) {
 			if ((new Cart)->add_db($item_id, 1)) {
-				set_message('商品をカートに入れました');
+				session()->flash('add_message', '商品をカートに入れました');
 			} else {
-				set_message('在庫が足りません', false);
+				session()->flash('add_message', '在庫が足りません');
 			}
 		} else {
-			set_message('リロードはできません', false);
+			session()->flash('add_message', 'リロードはできません');
 		}
 		session()->forget('id');
 		return $this->index();
@@ -46,10 +46,10 @@ class CartController extends Controller {
 		$cart_id = $request->input('cart_id');
 		if ((new Cart)->soft_delete_db($cart_id)) {
 			$request->session()->regenerateToken();
-			set_message('カートから商品を削除しました');
+			session()->flash('del_message', 'カートから商品を削除しました');
 		} else {
-			set_message('リロードはできません');
+			session()->flash('del_message', 'リロードはできません');
 		}
-		return $this->index();
+		return redirect('cart/index');
 	}
 }

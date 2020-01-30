@@ -8,6 +8,13 @@
 <div class="panel-heading">商品詳細</div>
 
 <div class="panel-body">
+<!-- フラッシュメッセージ -->
+@if (session('add_message'))
+	<div class="flash_message">
+	{{ session('add_message') }}
+	</div>
+@endif
+<br>
 商品名<br>
 {{ $item->name }}<br>
 商品説明<br>
@@ -19,8 +26,7 @@
 	在庫なし
 @else ($item->stock >= 1)
 	在庫あり<br>
-	{{ Form::open(['route' => 'cart.index']) }}
-	<a href="{{ route('cart.index') }}">{{ Form::button('カートに入れる') }}</a>
+	<a href="{{ route('cart.add') }}">{{ Form::button('カートに入れる') }}</a>
 @endif
 <br>
 <a href="{{ route('item.index') }}">商品一覧へ</a>

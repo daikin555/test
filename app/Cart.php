@@ -7,6 +7,7 @@ use Illuminate\Support\facades\Auth;
 use App\Item;
 
 class Cart extends Model {
+
 	use SoftDeletes; //ソフトデリート準備
 	protected $fillable = ['user_id', 'item_id', 'stock'];
 	protected $tabel = 'carts';
@@ -20,7 +21,7 @@ class Cart extends Model {
 		$carts = $this->where('user_id', $auth_id)->get();
 		return $carts;
 	}
-	public function add_db(int $item_id, $add_qty) {
+	public function add_db($item_id, $add_qty) {
 		$item = (new Item)->findOrFail($item_id);
 		$stock = $item->stock;
 		//在庫なしバリデーション

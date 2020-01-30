@@ -8,22 +8,32 @@
 <div class="panel-heading">カート内容</div>
 <div class="panel-body">
 
+<!-- フラッシュメッセージ -->
+@if (session('del_message'))
+	<div class="flash_message">
+	{{ session('del_message') }}
+	</div>
+@endif
 @if (0 < $carts->count())
-	<table>
+	<table border='2'>
+	<tr>
 	<th>商品名</th>
 	<th>購入数</th>
 	<th>価格</th>
 	<th>削除</th>
 	</tr>
 	@foreach ($carts as $cart)
+		<tr>
 		<td align="right">{{ $cart->item->name }}</td>
 		<td align="right">{{ $cart->stock }}</td>
 		<td align="right">{{ $cart->subtotal() }}</td>
-		<td>{{ Form::open('route' => 'cart.delete') }}
+		<td>
+		{{ Form::open(['route' => 'cart.delete']) }}
 		{{ csrf_field() }}
 		{{ Form::hidden('cart_id', $cart->id) }}
 		{{ Form::submit('削除') }}
-		</form></td></tr>
+		{{ Form::close() }}
+		</td></tr>
 	@endforeach
 	<td>合計</td>
 	<td>{{ $subtotals }}</td>
@@ -35,10 +45,9 @@
 	<h1>カートに商品はありません</h1>
 @endif
 <br>
-<h2><a href="{{ route('items.index') }}">商品一覧へ戻る</a></h2>
+<p><a href="{{ route('item.index') }}">商品一覧へ戻る</a></p>
 </body>
 
-@endforeach
 </div>
 </div>
 </div>
