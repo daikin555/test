@@ -4,10 +4,7 @@
 <div class="col-md-8 col-md-offset-2">
 <div class="panel panel-default">
 <div class="panel-heading">カート内容</div>
-
 <div class="panel-body">
-
-<?php $__env->startSection('content'); ?>
 
 <?php if(0 < $carts->count()): ?>
 	<table>
@@ -42,8 +39,6 @@
 <br>
 <h2><a href="<?php echo e(route('items.index')); ?>">商品一覧へ戻る</a></h2>
 </body>
-<?php $__env->stopSection(); ?>
-
 
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 </div>
@@ -54,5 +49,4 @@
 </div>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.mini_app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

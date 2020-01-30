@@ -6,10 +6,7 @@
 <div class="col-md-8 col-md-offset-2">
 <div class="panel panel-default">
 <div class="panel-heading">カート内容</div>
-
 <div class="panel-body">
-@extends('layouts.mini_app')
-@section('content')
 
 @if (0 < $carts->count())
 	<table>
@@ -40,8 +37,6 @@
 <br>
 <h2><a href="{{ route('items.index') }}">商品一覧へ戻る</a></h2>
 </body>
-@endsection
-
 
 @endforeach
 </div>
