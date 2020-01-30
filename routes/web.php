@@ -8,6 +8,7 @@ Route::group(['middleware' => 'auth:user'], function() {
 	Route::get('/detail/{id}', 'ItemController@detail')->name('item.name');
 	Route::get('/home', 'HomeController@index')->name('home');
 	Route::get('/index', 'ItemController@index')->name('item.index');
+	Route::post('/cart/index', 'CartController@index')->name('cart.index');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:user'], function() {
@@ -25,7 +26,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:user'], function() {
 		Route::post('login', 'Admin\LoginController@login');
 		Route::post('/update', 'Admin\ItemController@add')->name('items.add');
 		Route::get('/items/update', 'Admin\ItemController@create')->name('items.update');
-		//Route::post('/home', 'HomeController@index')->name('admins.home');
 	});
 
 	Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {

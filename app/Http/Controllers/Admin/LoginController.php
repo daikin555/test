@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 
-class LoginController extends Controller
-{
+class LoginController extends Controller {
 
 	use AuthenticatesUsers;
 
@@ -28,7 +27,6 @@ class LoginController extends Controller
 
 	public function logout(Request $request) {
 		Auth::guard('admin')->logout();
-		//$request->session()->flush();
 		$request->session()->regenerate();
 
 		return redirect('/admin/login');
