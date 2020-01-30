@@ -10,7 +10,7 @@ class ItemController extends Controller {
 		return view('items.index', compact('items'));
 	}
 	public function detail(Request $request, $id) {
-		$item = DB::table('items')->where('id', '=', $id)->get();
+		$item = DB::table('items')->find($id);
 		return view('items.detail', compact('item'));
 	}
 
