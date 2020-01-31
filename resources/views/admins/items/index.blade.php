@@ -34,7 +34,7 @@
 	<td>
 	@if ($item->stock == 0)
 		在庫なし
-	@elseif ($item->stock >= 1)
+	@else
 		在庫あり
 	@endif
 	</td>

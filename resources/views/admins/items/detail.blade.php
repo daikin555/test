@@ -24,7 +24,7 @@
 在庫の有無<br>
 @if ($item->stock == 0)
 	在庫なし
-@else ($item->stock >= 1)
+@else
 	在庫あり
 @endif
 <br>

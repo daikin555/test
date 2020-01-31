@@ -17,7 +17,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:user'], function() {
 });
 
 	Route::group(['prefix' => 'admin'], function() {
-		Route::get('/', function () { return redirect('/admin/home'); });
+		Route::get('/', function () { return redirect('/index'); });
 		Route::get('/index', 'Admin\ItemController@index')->name('items.index');
 		Route::get('login', 'Admin\LoginController@indexLoginForm')->name('admins.login');
 		Route::get('/detail/{id}', 'Admin\ItemController@detail')->name('items.name');
