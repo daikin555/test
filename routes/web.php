@@ -1,6 +1,8 @@
 <?php
 Auth::routes();
 Route::get('/', function() { return redirect('/home'); });
+Route::get('/index', 'ItemController@index');
+Route::get('/detail/{id}', 'ItemController@detail')->name('item.name');
 
 Route::group(['middleware' => 'auth:user'], function() {
 	Route::get('/', function () { return redirect('/items/index'); });
