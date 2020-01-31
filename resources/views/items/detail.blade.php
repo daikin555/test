@@ -26,7 +26,11 @@
 	在庫なし
 @else ($item->stock >= 1)
 	在庫あり<br>
+	@if (Auth::user())
 	<a href="{{ route('cart.add') }}">{{ Form::button('カートに入れる') }}</a>
+	@else
+	<a href="{{ route('cart.add') }}">{{ Form::button('ログインする') }}</a>
+	@endif
 @endif
 <br>
 <a href="{{ route('item.index') }}">商品一覧へ</a>

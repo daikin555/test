@@ -25,7 +25,11 @@
 	在庫なし
 <?php else: ?>
 	在庫あり<br>
+	<?php if(Auth::user()): ?>
 	<a href="<?php echo e(route('cart.add')); ?>"><?php echo e(Form::button('カートに入れる')); ?></a>
+	<?php else: ?>
+	<a href="<?php echo e(route('cart.add')); ?>"><?php echo e(Form::button('ログインする')); ?></a>
+	<?php endif; ?>
 <?php endif; ?>
 <br>
 <a href="<?php echo e(route('item.index')); ?>">商品一覧へ</a>
