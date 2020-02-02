@@ -16,14 +16,14 @@ class RedirectIfAuthenticated
 	 * @return mixed
 	 */
 	public function handle($request, Closure $next, $guard = null) {
-		$redirectTo = "/home";
+		$redirectTo = "/admins/home";
 
 		if ($guard === "admin") {
-			$redirectTo = "/admin/home";
+			$redirectTo = "/admins/home";
 		}
 
 		if (Auth::guard($guard)->check()) {
-			return redirect('/home');
+			return redirect('/index');
 		}
 
 		return $next($request);

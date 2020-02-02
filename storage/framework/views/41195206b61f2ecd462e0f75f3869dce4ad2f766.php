@@ -6,6 +6,6 @@
 </head>
 <body>
 <h1>数字を表示</h1>
-<p>{{ $var }}</p>
+<p><?php echo e($var); ?></p>
 </body>
 </html>

@@ -6,8 +6,7 @@ use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
-class Handler extends ExceptionHandler
-{
+class Handler extends ExceptionHandler {
 	/**
 	 * A list of the exception types that are not reported.
 	 *
@@ -53,7 +52,7 @@ class Handler extends ExceptionHandler
 		}
 
 		if (in_array('admin', $exception->guards())) {
-			return redirect()->guest(route('admin.login'));
+			return redirect()->guest(route('admins.login'));
 		}
 
 		return redirect()->guest(route('login'));

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app_admin')
 
 @section('content')
 <div class="container">
@@ -6,8 +6,15 @@
 <div class="col-md-8 col-md-offset-2">
 <div class="panel panel-default">
 <div class="panel-heading">商品詳細</div>
-
 <div class="panel-body">
+<!-- フラッシュメッセージ -->
+@if (session('edit_message'))
+	<div class="flash_message">
+	{{ session('edit_message') }}
+	</div>
+@endif
+<a href="{{ route('items.index') }}">商品一覧へ</a>
+<br>
 商品名<br>
 {{ $item->name }}<br>
 商品説明<br>
@@ -21,7 +28,7 @@
 	在庫あり
 @endif
 <br>
-<a href="{{ route('item.index') }}">商品一覧へ</a>
+<a href="{{ route('items.edit') }}">商品編集</a>
 </div>
 </div>
 </div>
