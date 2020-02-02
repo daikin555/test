@@ -12,12 +12,12 @@ class ItemController extends Controller {
 	public function index () {
 		session(['id' => '']);
 		$items = DB::table('items')->get();
-		return view('items.index', ['items' => $items]);
+		return view('items.index', compact('items'));
 	}
-
 	public function detail(Request $request, $id) {
 		session(['id' => $id]);
 		$desc = (new Item)->findGet($id);
 		return view('items.detail', ['item' => $desc]);
 	}
+
 }

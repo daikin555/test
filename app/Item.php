@@ -7,12 +7,18 @@ class Item extends Model {
 
 	public $timestamps = false;
 
+	public function rules() {
+		return [
+			'name' => ['required', 'string'],
+			'descrip' => ['required', 'string'],
+			'price' => ['required', 'integer'],
+			'stock' => ['required', 'integer']
+		];
+	}
+
 	protected $fillable = ['name', 'descrip', 'price', 'stock'];
 	protected $table = 'items';
 
-	public function findGet($id) {
-		return $this->find($id);
-	}
 	public function createDb($request) {
 		$name = $request->input('name');
 		$descrip = $request->input('descrip');

@@ -8,12 +8,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/index', 'ItemController@index')->name('item.index');
 
 Route::group(['middleware' => 'auth:user'], function() {
-	/*Route::get('/', function () { return redirect('/items/index'); });
-	Route::get('/index', 'ItemController@index');
-	Route::get('/detail/{id}', 'ItemController@detail')->name('item.name');
-	Route::get('/home', 'HomeController@index')->name('home');
-	Route::get('/index', 'ItemController@index')->name('item.index');*/
-	//Route::get('/cart/index', 'CartController@index')->name('cart.index');
 	Route::get('/cart/index', 'CartController@add')->name('cart.add');
 	Route::post('/cart/index', 'CartController@delete')->name('cart.delete');
 });
