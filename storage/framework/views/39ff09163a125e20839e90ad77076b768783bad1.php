@@ -34,7 +34,7 @@
 	<td>
 	<?php if($item->stock == 0): ?>
 		在庫なし
-	<?php elseif($item->stock >= 1): ?>
+	<?php else: ?>
 		在庫あり
 	<?php endif; ?>
 	</td>
