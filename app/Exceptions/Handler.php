@@ -57,4 +57,13 @@ class Handler extends ExceptionHandler {
 
 		return redirect()->guest(route('login'));
 	}
+
+	protected function prepareResponse($request, Exception $e) {
+		// デバッグ以外の環境で、HTTPじゃない例外が起これば、HTTP例外の500に変更する
+		if ( !$this->isHttpException($e) && !config('app.debug')) {
+			$e = new HttpException(500, $e->getMessage(), $e);
+		}
+
+		return parent::prepareResponse($request, $e);
+	}
 }

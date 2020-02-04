@@ -9,8 +9,10 @@
 <!-- フラッシュメッセージ -->
 <?php if(session('add_message')): ?>
 	<div class="flash_message">
+	<font color="red">
 	<?php echo e(session('add_message')); ?>
 
+	</font>
 	</div>
 <?php endif; ?>
 <br>

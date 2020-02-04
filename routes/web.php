@@ -33,3 +33,5 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
 	Route::post('logout', 'Admin\LoginController@logout')->name('admins.logout');
 	Route::get('home', 'Admin\HomeController@index')->name('admins.home');
 });
+
+Route::post('qr-bot', 'QrBotController@reply');

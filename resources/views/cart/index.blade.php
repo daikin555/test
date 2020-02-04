@@ -11,7 +11,16 @@
 <!-- フラッシュメッセージ -->
 @if (session('del_message'))
 	<div class="flash_message">
+	<font color="red">
 	{{ session('del_message') }}
+	</font>
+	</div>
+@endif
+@if (session('add_message'))
+	<div class="flash_message">
+	<font color="red">
+	{{ session('add_message') }}
+	</font>
 	</div>
 @endif
 @if (0 < $carts->count())

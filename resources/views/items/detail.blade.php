@@ -11,7 +11,9 @@
 <!-- フラッシュメッセージ -->
 @if (session('add_message'))
 	<div class="flash_message">
+	<font color="red">
 	{{ session('add_message') }}
+	</font>
 	</div>
 @endif
 <br>

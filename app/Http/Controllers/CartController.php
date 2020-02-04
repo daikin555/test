@@ -7,12 +7,17 @@ use App\Item;
 use App\Cart;
 
 class CartController extends Controller {
+
 	public function index() {
 		$carts = (new Cart)->all_get(Auth::id());
 		$subtotals = $this->subtotals($carts);
 		$totals = $this->totals($carts);
+		if (is_null($carts)) {
+			abort(404);
+		}
 		return view('cart.index', compact('carts', 'totals', 'subtotals'));
 	}
+
 	private function subtotals($carts) {
 		$result = 0;
 		foreach ($carts as $cart) {
@@ -20,14 +25,17 @@ class CartController extends Controller {
 		}
 		return $result;
 	}
+
 	private function totals($carts) {
 		$result = $this->subtotals($carts) + $this->tax($carts);
 		return $result;
 	}
+
 	private function tax($carts) {
 		$result = floor($this->subtotals($carts) * 0.1);
 		return $result;
 	}
+
 	public function add() {
 		$item_id = session('id');
 		if (isset($item_id)) {
@@ -36,12 +44,13 @@ class CartController extends Controller {
 			} else {
 				session()->flash('add_message', '在庫が足りません');
 			}
-		} else {
+		}/* else {
 			session()->flash('add_message', 'リロードはできません');
-		}
-		session()->forget('id');
-		return $this->index();
+	}*/
+			session()->forget('id');
+			return $this->index();
 	}
+
 	public function delete(Request $request) {
 		$cart_id = $request->input('cart_id');
 		if ((new Cart)->soft_delete_db($cart_id)) {
