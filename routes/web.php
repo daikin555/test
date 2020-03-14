@@ -10,6 +10,13 @@ Route::get('/index', 'ItemController@index')->name('item.index');
 Route::group(['middleware' => 'auth:user'], function() {
 	Route::get('/cart/index', 'CartController@add')->name('cart.add');
 	Route::post('/cart/index', 'CartController@delete')->name('cart.delete');
+
+	Route::get('/address/index', 'AddressController@index')->name('address.index');
+	Route::get('/address/edit/{id}', 'AddressController@edit')->name('address.edit');
+	Route::post('/address/update', 'AddressController@update')->name('address.update');
+	Route::get('/address/register', 'AddressController@register')->name('address.register');
+	Route::post('/address/add', 'AddressController@add')->name('address.add');
+	Route::get('/address/delete', 'AddressController@delete')->name('address.delete');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:user'], function() {
@@ -33,5 +40,3 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
 	Route::post('logout', 'Admin\LoginController@logout')->name('admins.logout');
 	Route::get('home', 'Admin\HomeController@index')->name('admins.home');
 });
-
-Route::post('qr-bot', 'QrBotController@reply');

@@ -6,8 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateItemsTable extends Migration
 {
-	public function up()
-	{
+	public function up() {
 		Schema::create('items', function (Blueprint $table) {
 			$table->increments('id');
 			$table->text('item_name');

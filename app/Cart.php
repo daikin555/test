@@ -23,18 +23,19 @@ class Cart extends Model {
 	}
 
 	public function add_db($item_id, $add_stk) {
-		DB::transaction(function() use($item_id, $add_stk) {
-			$item = (new Item)->findOrFail($item_id);
-			$stock = $item->stock;
-			if ($stock <= 0 || $stock < $add_stk) {
-				return false;
-			}
-			$cart = $this->firstOrCreate(['user_id' => Auth::id(), 'item_id' => $item_id], ['stock' => 0]);
-			$cart->increment('stock', $add_stk);
-			$item->decrement('stock', $add_stk);
-			session()->forget('id');
-			return true;
-		});
+		$item = (new Item)->findOrFail($item_id);
+		$stock = $item->stock;
+		if ($stock <= 0 || $stock < $add_stk) {
+			return false;
+		} else {
+			DB::transaction(function() use($item_id, $add_stk, $item) {
+				$cart = $this->firstOrCreate(['user_id' => Auth::id(), 'item_id' => $item_id], ['stock' => 0]);
+				$cart->increment('stock', $add_stk);
+				$item->decrement('stock', $add_stk);
+				session()->forget('id');
+				return true;
+			});
+		}
 		return view('cart.index');
 	}
 

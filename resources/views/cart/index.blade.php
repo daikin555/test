@@ -54,6 +54,7 @@
 	<h1>カートに商品はありません</h1>
 @endif
 <br>
+<p><a href="{{ route('address.index') }}">お届け先選択</a></p>
 <p><a href="{{ route('item.index') }}">商品一覧へ戻る</a></p>
 </body>
 

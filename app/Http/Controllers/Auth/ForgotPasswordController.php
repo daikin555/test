@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
-class ForgotPasswordController extends Controller
-{
+class ForgotPasswordController extends Controller {
     /*
     |--------------------------------------------------------------------------
     | Password Reset Controller
@@ -25,8 +25,16 @@ class ForgotPasswordController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('guest');
-    }
+    public function __construct() {
+		$this->middleware('guest');
+	}
+
+	public function sendResetLinkEmail(Request $request) {
+		$this->validateEmail($request);
+		$response = $this->broker()->sendResetLink(
+			$request->only('email')
+		);
+		return back()->with('status', 'パスワード再設定用のURLをメールで送りました。');
+	}
+
 }

@@ -9,16 +9,18 @@
 <!-- フラッシュメッセージ -->
 <?php if(session('del_message')): ?>
 	<div class="flash_message">
+	<font color="red">
 	<?php echo e(session('del_message')); ?>
 
+	</font>
 	</div>
 <?php endif; ?>
 <?php if(session('add_message')): ?>
 	<div class="flash_message">
-<font color="red">
+	<font color="red">
 	<?php echo e(session('add_message')); ?>
 
-</font>
+	</font>
 	</div>
 <?php endif; ?>
 <?php if(0 < $carts->count()): ?>
@@ -57,6 +59,7 @@
 	<h1>カートに商品はありません</h1>
 <?php endif; ?>
 <br>
+<p><a href="<?php echo e(route('address.index')); ?>">お届け先選択</a></p>
 <p><a href="<?php echo e(route('item.index')); ?>">商品一覧へ戻る</a></p>
 </body>
 
