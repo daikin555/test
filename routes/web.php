@@ -17,6 +17,15 @@ Route::group(['middleware' => 'auth:user'], function() {
 	Route::get('/address/register', 'AddressController@register')->name('address.register');
 	Route::post('/address/add', 'AddressController@add')->name('address.add');
 	Route::get('/address/delete', 'AddressController@delete')->name('address.delete');
+
+	Route::get('/user/index', 'UserController@index')->name('user.index');
+	Route::get('/user/edit_name', 'UserController@edit_name')->name('user.edit_name');
+	Route::get('/user/edit_email', 'UserController@edit_email')->name('user.edit_email');
+	Route::get('/user/edit_password', 'UserController@edit_password')->name('user.edit_password');
+	Route::post('/user/name', 'UserController@name_update')->name('user.name');
+	Route::post('/user/email', 'UserController@update_email')->name('update.email');
+	Route::post('/send/email', 'ChangeEmailController@sendChangeEmailLink')->name('send.email');
+	Route::post('/user/password', 'UserController@update_password')->name('update.password');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:user'], function() {
