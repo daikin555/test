@@ -23,8 +23,8 @@ Route::group(['middleware' => 'auth:user'], function() {
 	Route::get('/user/edit_email', 'UserController@edit_email')->name('user.edit_email');
 	Route::get('/user/edit_password', 'UserController@edit_password')->name('user.edit_password');
 	Route::post('/user/name', 'UserController@name_update')->name('user.name');
-	Route::post('/user/email', 'UserController@update_email')->name('update.email');
 	Route::post('/send/email', 'ChangeEmailController@sendChangeEmailLink')->name('send.email');
+	Route::get('reset/{token}', 'ChangeEmailController@reset');
 	Route::post('/user/password', 'UserController@update_password')->name('update.password');
 });
 

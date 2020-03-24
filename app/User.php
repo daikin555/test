@@ -2,11 +2,13 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\PasswordResetNotification;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 class User extends Authenticatable {
 	use Notifiable;
@@ -18,6 +20,7 @@ class User extends Authenticatable {
 	protected $hidden = [
 		'password', 'remember_token',
 	];
+
 
 	public function sendPasswordResetNotification($token) {
 		$this->notify(new PasswordResetNotification($token));
@@ -44,19 +47,15 @@ class User extends Authenticatable {
 		}
 	}
 
-	/*public function emailUp($request, $id) {
-		$data = $this->findOrFail($id);
-	}
-
-	public function passwordUp($request, $id) {
+	public function passUp($request, $id) {
 		$data = $this->findOrFail($id);
 		if ($data->id == Auth::id()) {
-			$data->password = Hash::make($request->input('password'));
+			$data->password = Hash::make($request->input('new_password'));
 			$data->save();
 			return true;
 		} else {
 			return false;
 		}
-	}*/
+	}
 
 }

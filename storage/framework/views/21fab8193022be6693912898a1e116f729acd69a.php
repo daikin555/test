@@ -59,10 +59,6 @@
 <a href="<?php echo e(route('user.index')); ?>">
 アカウント編集
 </a>
-<form id="logout-form" action="<?php echo e(route('user.index')); ?>" method="POST" style="display: none;">
-<?php echo e(csrf_field()); ?>
-
-</form>
 </li>
 
 <li>

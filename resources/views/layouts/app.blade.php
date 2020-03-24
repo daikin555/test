@@ -58,9 +58,6 @@
 <a href="{{ route('user.index') }}">
 アカウント編集
 </a>
-<form id="logout-form" action="{{ route('user.index') }}" method="POST" style="display: none;">
-{{ csrf_field() }}
-</form>
 </li>
 
 <li>
