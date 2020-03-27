@@ -16,7 +16,7 @@ class ChangeEmailController extends Controller {
 
 	public function sendChangeEmailLink(Request $request) {
 		validator()->validate($request->all(), [
-			'email' => 'required|email',
+			'email' => 'required|email|unique:email_resets,new_email',
 			'password' => 'required',
 		]);
 
