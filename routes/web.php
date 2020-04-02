@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth:user'], function() {
 	Route::post('/user/password', 'UserController@update_password')->name('update.password');
 });
 
+// 管理者側
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:user'], function() {
 	Route::post('logout', 'LoginController@logout')->name('logout');
 	Route::get('home', 'HomeController@index')->name('home');
@@ -43,6 +44,11 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::post('login', 'Admin\LoginController@login');
 	Route::post('/update', 'Admin\ItemController@add')->name('items.add');
 	Route::get('/items/update', 'Admin\ItemController@create')->name('items.update');
+	Route::get('/items/img/{item_id}', 'Admin\ItemController@img')->name('items.img');
+	Route::post('/items/img/add/{item_id}', 'Admin\ItemController@add_img')->name('items.add_img');
+
+	Route::get('/menber', 'Admin\MenberController@index')->name('menber.index');
+	Route::get('/menber/detail/{id}', 'Admin\MenberController@detail')->name('menber.detail');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {

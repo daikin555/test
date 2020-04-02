@@ -53,6 +53,13 @@
 </a>
 
 <ul class="dropdown-menu">
+
+<li>
+<a href="<?php echo e(route('menber.index')); ?>">
+会員一覧
+</a>
+</li>
+
 <li>
 <a href="<?php echo e(route('admins.logout')); ?>"
 onclick="event.preventDefault();

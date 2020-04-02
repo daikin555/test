@@ -52,6 +52,13 @@
 </a>
 
 <ul class="dropdown-menu">
+
+<li>
+<a href="{{ route('menber.index') }}">
+会員一覧
+</a>
+</li>
+
 <li>
 <a href="{{ route('admins.logout') }}"
 onclick="event.preventDefault();

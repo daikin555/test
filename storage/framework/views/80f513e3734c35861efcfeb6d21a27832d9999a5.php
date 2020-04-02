@@ -4,17 +4,16 @@
 <div class="col-md-8 col-md-offset-2">
 <div class="panel panel-default">
 <div class="panel-heading">商品詳細</div>
-
 <div class="panel-body">
 <!-- フラッシュメッセージ -->
-<?php if(session('add_message')): ?>
+<?php if(session('edit_message')): ?>
 	<div class="flash_message">
-	<font color="red">
-	<?php echo e(session('add_message')); ?>
+	<?php echo e(session('edit_message')); ?>
 
-	</font>
 	</div>
 <?php endif; ?>
+<a href="<?php echo e(route('items.index')); ?>">商品一覧へ</a>
+<br>
 商品画像<br>
 <?php if($item->image == NULL): ?>
 画像なし
@@ -32,15 +31,10 @@
 <?php if($item->stock == 0): ?>
 	在庫なし
 <?php else: ?>
-	在庫あり<br>
-	<?php if(Auth::user()): ?>
-	<a href="<?php echo e(route('cart.add')); ?>"><?php echo e(Form::button('カートに入れる')); ?></a>
-	<?php else: ?>
-	<a href="<?php echo e(route('cart.add')); ?>"><?php echo e(Form::button('ログインする')); ?></a>
-	<?php endif; ?>
+	在庫あり
 <?php endif; ?>
 <br>
-<a href="<?php echo e(route('item.index')); ?>">商品一覧へ</a>
+<a href="<?php echo e(route('items.edit')); ?>">商品編集</a>
 </div>
 </div>
 </div>
@@ -49,4 +43,4 @@
 </div>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('layouts.app_admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

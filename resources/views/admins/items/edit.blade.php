@@ -10,6 +10,15 @@
 
 <a href="{{ route('items.index') }}">商品一覧へ</a>
 <br>
+商品画像<br>
+@if ($item->image == NULL)
+画像なし
+@else
+<img src="{{ asset('/storage/image/'.$item->image) }}"width="200" height="200">
+@endif
+<br>
+<a href="{{ route('items.img', ['item_id' => $item->id]) }}">商品画像編集はこちら</a>
+<br>
 {{ Form::open(['route' => 'items.edit']) }}
 商品名:
 {{ Form::text('name' , $item->name) }}<br>

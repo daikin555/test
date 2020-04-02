@@ -58,4 +58,8 @@ class User extends Authenticatable {
 		}
 	}
 
+	public function menberFind($id) {
+		$dateils = $this->find($id);
+		return $dateils;
+	}
 }

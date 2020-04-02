@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\ItemRequest;
 use DB;
 use App\Item;
+use App\Http\Requests\ImageRequest;
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -49,5 +50,26 @@ class ItemController extends Controller {
 		(new Item)->updateDb($id, $request);
 		session()->flash('edit_message', '商品を編集しました');
 		return redirect(route('items.name', ['id' => $id]));
+	}
+
+	public function img(Request $request, $item_id) {
+		if (session('id') == $item_id) {
+			return view('admins.items.img', compact('item_id'));
+		} else {
+			session()->flash('add_message', 'アクセスに失敗しました');
+			return redirect(route('items.index'));
+		}
+	}
+
+	public function add_img(ImageRequest $request, $item_id) {
+		if (session('id') == $item_id) {
+			if ($request->isMethod('POST')) {
+				(new Item)->updateImg($request, $item_id);
+				return redirect(route('items.index'))->with(['success'=> 'ファイルを保存しました']);
+			}
+			return redirect(route('admins.items.img', compact('item_id')));
+		}
+		session()->flash('add_message', 'アクセスに失敗しました');
+		return redirect(route('items.index'));
 	}
 }
