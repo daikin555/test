@@ -16,11 +16,13 @@
 	</font>
 	</div>
 @endif
+{{ Form::open(['route' => 'stripe']) }}
+{{ csrf_field() }}
 <table border='2'>
 @foreach ($address as $add)
 	<tr>
 	<td width="30" align="center">
-	{{Form::radio('single')}}
+	{{ Form::radio('delivery', $add->id) }}
 	</td>
 	<th>
 	{{ $add->md5 }}
@@ -34,6 +36,8 @@
 	</tr>
 @endforeach
 </table>
+{{ Form::submit('購入画面へ') }}
+{{ Form::close() }}
 <p><a href="{{ route('item.index') }}">商品一覧へ戻る</a></p>
 </div>
 </div>

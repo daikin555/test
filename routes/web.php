@@ -26,6 +26,14 @@ Route::group(['middleware' => 'auth:user'], function() {
 	Route::post('/send/email', 'ChangeEmailController@sendChangeEmailLink')->name('send.email');
 	Route::get('reset/{token}', 'ChangeEmailController@reset');
 	Route::post('/user/password', 'UserController@update_password')->name('update.password');
+
+	// 決済
+	Route::post('/stripe', 'PaymentController@index')->name('stripe');
+
+	// ストライプ関連
+	Route::get('/user/payment', 'PaymentController@getCurrentPayment')->name('user.payment');
+	Route::post('/user/payment/charge', 'PaymentController@charge')->name('charge');
+	Route::post('/user/payment/store', 'PaymentController@storePaymentInfo')->name('user.payment.store');
 });
 
 // 管理者側
