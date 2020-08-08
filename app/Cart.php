@@ -58,6 +58,19 @@ class Cart extends Model {
 		return view('cart.index');
 	}
 
+	public function purchased($cart_id) {
+			$cart = $this->find($cart_id);
+			if (is_null($cart)) {
+				abort(404);
+			}
+			if ($cart->user_id == Auth::id()) {
+				$cart->delete();
+				return true;
+			}
+			return false;
+		}
+
+
 	public function subtotal() {
 		$result = $this->item->price * $this->stock;
 		return $result;

@@ -12,7 +12,11 @@
 
 <!-- Styles -->
 <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet">
+
+<script src="<?php echo e(asset('js/app.js')); ?>"></script>
+
 </head>
+
 <body>
 <div id="app">
 <nav class="navbar navbar-default navbar-static-top">
@@ -82,8 +86,5 @@ document.getElementById('logout-form').submit();">
 
 <?php echo $__env->yieldContent('content'); ?>
 </div>
-
-<!-- Scripts -->
-<script src="<?php echo e(asset('js/app.js')); ?>"></script>
 </body>
 </html>

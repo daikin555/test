@@ -17,7 +17,7 @@ Route::group(['middleware' => 'auth:user'], function() {
 	Route::get('/address/register', 'AddressController@register')->name('address.register');
 	Route::post('/address/add', 'AddressController@add')->name('address.add');
 	Route::get('/address/delete', 'AddressController@delete')->name('address.delete');
-
+	// アカウントページ
 	Route::get('/user/index', 'UserController@index')->name('user.index');
 	Route::get('/user/edit_name', 'UserController@edit_name')->name('user.edit_name');
 	Route::get('/user/edit_email', 'UserController@edit_email')->name('user.edit_email');

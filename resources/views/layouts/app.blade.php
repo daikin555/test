@@ -12,7 +12,11 @@
 
 <!-- Styles -->
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+<script src="{{ asset('js/app.js') }}"></script>
+
 </head>
+
 <body>
 <div id="app">
 <nav class="navbar navbar-default navbar-static-top">
@@ -80,8 +84,5 @@ document.getElementById('logout-form').submit();">
 
 @yield('content')
 </div>
-
-<!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

@@ -6,7 +6,6 @@
 				<div class="panel-heading">決済・確認画面</div>
 					<div class="panel-body">
 
-
 						<!-- フラッシュメッセージ -->
 						<?php if(session('index_message')): ?>
 						<div class="flash_message">
@@ -74,16 +73,14 @@
 
 						<p><a href="<?php echo e(route('address.index')); ?>">お届け先を変更する</a></p>
 
-
-
-						<form action="<?php echo e(route('charge')); ?>" method="POST">
+						<form id="app" action="<?php echo e(route('charge')); ?>" method="POST">
 							<?php echo e(csrf_field()); ?>
 
-							<a class="btn btn-primary" href="/customer/home">戻る</a>
+							<a class="btn btn-primary" href="<?php echo e(route('address.index')); ?>">戻る</a>
 							<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
 								data-key="<?php echo e(env('STRIPE_PUBLIC_KEY')); ?>"
-								data-amount="1000"
-								data-name="Stripe Demo"
+								data-amount="<?php echo e($totals); ?>"
+								data-name="決済確認画面"
 								data-label="決済をする"
 								data-description="Online course about integrating Stripe"
 								data-image="https://stripe.com/img/documentation/checkout/marketplace.png"

@@ -44,26 +44,8 @@ class PaymentController extends Controller {
 	}
 
 	public function charge(Request $request) {
-		/*\Stripe\Stripe::setApiKey('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
-
-		$session = \Stripe\Checkout\Session::create([
-			'payment_method_types' => ['card'],
-			'line_items' => [[
-				'name' => "Cucumber from Roger's Farm",
-				'amount' => 200,
-				'currency' => 'usd',
-				'quantity' => 10,
-			]],
-			'payment_intent_data' => [
-				'application_fee_amount' => 200,
-			],
-			'success_url' => 'https://procir-study.site//itou175/laravel/public/stripe',
-			'cancel_url' => 'https://procir-study.site//itou175/laravel/public/stripe',
-		], [
-			'stripe_account' => '{{CONNECTED_STRIPE_ACCOUNT_ID}}',
-		]);
-
-		return (route('stripe'));*/
+		$carts = (new Cart)->all_get(Auth::id());
+		$totals = $this->totals($carts);
 		try {
 			Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
 
@@ -74,11 +56,15 @@ class PaymentController extends Controller {
 
 			$charge = \Stripe\Charge::create(array(
 				'customer' => $customer->id,
-				'amount' => 1000,
+				'amount' => $totals,
 				'currency' => 'jpy'
 			));
+			foreach ($carts as $cart) {
+				(new Cart)->purchased($cart->id);
+			}
 
-			return (route('stripe'));
+
+			return redirect()->route('item.index');
 		} catch (\Exception $ex) {
 			return $ex->getMessage();
 		}

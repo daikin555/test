@@ -8,7 +8,6 @@
 				<div class="panel-heading">決済・確認画面</div>
 					<div class="panel-body">
 
-
 						<!-- フラッシュメッセージ -->
 						@if (session('index_message'))
 						<div class="flash_message">
@@ -69,44 +68,13 @@
 
 						<p><a href="{{ route('address.index') }}">お届け先を変更する</a></p>
 
-{{-- Form::open(array('url' => '/user/payment/charge')) !!}
-<script
-src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-data-key="{{env('STRIPE_PUBLIC_KEY')}}"
-data-name="WeDewLawns.com"
-data-billingAddress=true
-data-shippingAddress=true
-data-label="Buy"
-data-description="aaa"
-data-amount="1000">
-</script>
-{!! Form::close() !!}
-
-			<script>
-			var stripe = Stripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
-
-var checkoutButton = document.querySelector('#checkout-button');
-checkoutButton.addEventListener('click', function () {
-	stripe.redirectToCheckout({
-		items: [{
-			// Define the product and SKU in the Dashboard first, and use the SKU
-			// ID in your client-side code.
-			sku: 'sku_123',
-				quantity: 1
-		}],
-		successUrl: 'https://itou175/laravel/public/stripe',
-		cancelUrl: 'https://itou175/laravel/public/stripe'
-	});
-});
-</script>--}}
-
-						<form action="{{ route('charge') }}" method="POST">
+						<form id="app" action="{{ route('charge') }}" method="POST">
 							{{ csrf_field() }}
-							<a class="btn btn-primary" href="/customer/home">戻る</a>
+							<a class="btn btn-primary" href="{{ route('address.index') }}">戻る</a>
 							<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
 								data-key="{{ env('STRIPE_PUBLIC_KEY') }}"
-								data-amount="1000"
-								data-name="Stripe Demo"
+								data-amount="{{ $totals }}"
+								data-name="決済確認画面"
 								data-label="決済をする"
 								data-description="Online course about integrating Stripe"
 								data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
