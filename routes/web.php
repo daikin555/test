@@ -8,8 +8,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/index', 'ItemController@index')->name('item.index');
 
 Route::group(['middleware' => 'auth:user'], function() {
+	Route::get('/cart', 'CartController@index')->name('cart.index');
 	Route::get('/cart/index', 'CartController@add')->name('cart.add');
 	Route::post('/cart/index', 'CartController@delete')->name('cart.delete');
+	// 注文履歴
+	Route::get('/purchase', 'UserController@purchaseIndex')->name('user.purchase');
+	Route::get('/purchase/detail/{id}/{date}', 'UserController@purchaseDetail')->name('purchase.detail');
+	// キャンセル対応
+	Route::get('/cancel/{id}/{status}', 'UserController@cancel')->name('cancel');
 
 	Route::get('/address/index', 'AddressController@index')->name('address.index');
 	Route::get('/address/edit/{id}', 'AddressController@edit')->name('address.edit');

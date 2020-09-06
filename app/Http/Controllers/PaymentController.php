@@ -1,12 +1,14 @@
 <?php
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\facades\Auth;
 use App\Address;
 use App\Cart;
 use App\Item;
 use App\Payment;
+use App\Purchase;
 use Stripe\Stripe;
 use Stripe\Token;
 use Stripe\Charge;
@@ -45,7 +47,12 @@ class PaymentController extends Controller {
 
 	public function charge(Request $request) {
 		$carts = (new Cart)->all_get(Auth::id());
+		$stocktotal = (new Payment)->stockAllSum(Auth::id());
+		if ($stocktotal == 0) {
+			return redirect()->route('cart.index')->with('add_message', 'カートの中身が空です！決済は中断されました。');
+		}
 		$totals = $this->totals($carts);
+		$chargeId = null;
 		try {
 			Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
 
@@ -57,15 +64,24 @@ class PaymentController extends Controller {
 			$charge = \Stripe\Charge::create(array(
 				'customer' => $customer->id,
 				'amount' => $totals,
-				'currency' => 'jpy'
+				'currency' => 'jpy',
 			));
+			$chargeId = $charge->id;
+			DB::beginTransaction();
+			$payment = (new Payment)->purchaseData(Auth::id(), $request->address, $chargeId, $totals);
 			foreach ($carts as $cart) {
-				(new Cart)->purchased($cart->id);
+				(new Purchase)->purchased($cart->id, $payment->id);
+				(new Cart)->itemDeleted($cart->id);
 			}
-
-
+			DB::commit();
 			return redirect()->route('item.index');
 		} catch (\Exception $ex) {
+			DB::rollback();
+			if ($chargeId !== null) {
+				\Stripe\Refund::create(array(
+					'charge' => $chargeId,
+				));
+			}
 			return $ex->getMessage();
 		}
 	}

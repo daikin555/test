@@ -65,6 +65,18 @@
 </li>
 
 <li>
+<a href="{{ route('cart.index') }}">
+カートの中身へ
+</a>
+</li>
+
+<li>
+<a href="{{ route('user.purchase') }}">
+注文履歴
+</a>
+</li>
+
+<li>
 <a href="{{ route('logout') }}"
 onclick="event.preventDefault();
 document.getElementById('logout-form').submit();">

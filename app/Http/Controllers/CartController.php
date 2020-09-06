@@ -44,11 +44,9 @@ class CartController extends Controller {
 			} else {
 				session()->flash('add_message', '在庫が足りません');
 			}
-		}/* else {
-			session()->flash('add_message', 'リロードはできません');
-	}*/
 			session()->forget('id');
 			return $this->index();
+		}
 	}
 
 	public function delete(Request $request) {
@@ -59,6 +57,6 @@ class CartController extends Controller {
 		} else {
 			session()->flash('del_message', 'リロードはできません');
 		}
-		return redirect('cart/index');
+		return redirect()->route('cart.index');
 	}
 }

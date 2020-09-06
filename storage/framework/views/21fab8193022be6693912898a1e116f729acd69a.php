@@ -66,6 +66,18 @@
 </li>
 
 <li>
+<a href="<?php echo e(route('cart.index')); ?>">
+カートの中身へ
+</a>
+</li>
+
+<li>
+<a href="<?php echo e(route('user.purchase')); ?>">
+注文履歴
+</a>
+</li>
+
+<li>
 <a href="<?php echo e(route('logout')); ?>"
 onclick="event.preventDefault();
 document.getElementById('logout-form').submit();">

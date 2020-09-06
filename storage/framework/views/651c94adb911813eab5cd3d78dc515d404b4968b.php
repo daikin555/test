@@ -19,44 +19,44 @@
 						商品の確認
 						<table border='1'>
 							<tr>
-							<th>
-							商品名
-							</th>
-							<th>
-							個数
-							</th>
-							<th>
-							金額
-							</th>
+								<th>
+									商品名
+								</th>
+								<th>
+									個数
+								</th>
+								<th>
+									金額
+								</th>
 							</tr>
 							<tr>
-							<?php $__currentLoopData = $carts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cart): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-							<td>
-							<?php echo e($cart->item->name); ?>
+								<?php $__currentLoopData = $carts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cart): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+								<td>
+									<?php echo e($cart->item->name); ?>
 
-							</td>
-							<td>
-							<?php echo e($cart->stock); ?>
+								</td>
+								<td>
+									<?php echo e($cart->stock); ?>
 
-							</td>
-							<td>
-							<?php echo e($cart->subtotal()); ?>
+								</td>
+								<td>
+									<?php echo e($cart->subtotal()); ?>
 
-							</td>
+								</td>
 							</tr>
 							<tr>
-							<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-							<th>
-							合計
-							</th>
-							<td>
-							<?php echo e($stocktotals); ?>
+								<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+								<th>
+									合計
+								</th>
+								<td>
+									<?php echo e($stocktotals); ?>
 
-							</td>
-							<td>
-							<?php echo e($totals); ?>
+								</td>
+								<td>
+									<?php echo e($totals); ?>
 
-							</td>
+								</td>
 							</tr>
 						</table>
 						<p><a href="<?php echo e(route('cart.add')); ?>">商品編集へ戻る</a></p>
@@ -64,10 +64,10 @@
 						お届け先の確認
 						<table border='1'>
 							<tr>
-							<td>
-							<?php echo e($delivery->md5); ?>
+								<td>
+									<?php echo e($delivery->md5); ?>
 
-							</td>
+								</td>
 							</tr>
 						</table>
 
@@ -89,6 +89,10 @@
 								data-currency="JPY"
 								data-email="<?php echo e(Auth::user()->email); ?>">
 							</script>
+						<?php echo e(Form::hidden('address', $delivery->md5)); ?>
+
+						<?php echo e(Form::hidden('carts', $carts)); ?>
+
 						</form>
 						</body>
 

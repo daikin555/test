@@ -9,14 +9,21 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class ItemController extends Controller {
-	public function index () {
+	private $item_md;
+
+	public function __construct(Item $item_md) {
+		$this->item = $item_md;
+	}
+
+	public function index() {
 		session(['id' => '']);
-		$items = Item::all();
+		$items = $this->item->itemAllGet();
 		return view('items.index', compact('items'));
 	}
-	public function detail(Request $request, $id) {
+
+	public function detail($id) {
 		session(['id' => $id]);
-		$desc = Item::find($id);
+		$desc = $this->item->itemFind($id);
 		if (is_null($desc)) {
 			abort(404);
 		}

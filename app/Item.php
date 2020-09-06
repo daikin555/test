@@ -5,6 +5,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
 class Item extends Model {
+	protected $fillable = ['name', 'descrip', 'price', 'stock'];
+	protected $table = 'items';
 
 	public $timestamps = false;
 
@@ -17,8 +19,15 @@ class Item extends Model {
 		];
 	}
 
-	protected $fillable = ['name', 'descrip', 'price', 'stock'];
-	protected $table = 'items';
+	public function itemAllGet() {
+		$items = $this->all();
+		return $items;
+	}
+
+	public function itemFind($id) {
+		$item = $this->find($id);
+		return $item;
+	}
 
 	public function createDb($request) {
 		$name = $request->input('name');

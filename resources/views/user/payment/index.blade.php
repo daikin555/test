@@ -20,39 +20,39 @@
 						商品の確認
 						<table border='1'>
 							<tr>
-							<th>
-							商品名
-							</th>
-							<th>
-							個数
-							</th>
-							<th>
-							金額
-							</th>
+								<th>
+									商品名
+								</th>
+								<th>
+									個数
+								</th>
+								<th>
+									金額
+								</th>
 							</tr>
 							<tr>
-							@foreach ($carts as $cart)
-							<td>
-							{{ $cart->item->name }}
-							</td>
-							<td>
-							{{ $cart->stock }}
-							</td>
-							<td>
-							{{ $cart->subtotal() }}
-							</td>
+								@foreach ($carts as $cart)
+								<td>
+									{{ $cart->item->name }}
+								</td>
+								<td>
+									{{ $cart->stock }}
+								</td>
+								<td>
+									{{ $cart->subtotal() }}
+								</td>
 							</tr>
 							<tr>
-							@endforeach
-							<th>
-							合計
-							</th>
-							<td>
-							{{ $stocktotals }}
-							</td>
-							<td>
-							{{ $totals }}
-							</td>
+								@endforeach
+								<th>
+									合計
+								</th>
+								<td>
+									{{ $stocktotals }}
+								</td>
+								<td>
+									{{ $totals }}
+								</td>
 							</tr>
 						</table>
 						<p><a href="{{ route('cart.add') }}">商品編集へ戻る</a></p>
@@ -60,9 +60,9 @@
 						お届け先の確認
 						<table border='1'>
 							<tr>
-							<td>
-							{{ $delivery->md5 }}
-							</td>
+								<td>
+									{{ $delivery->md5 }}
+								</td>
 							</tr>
 						</table>
 
@@ -83,6 +83,8 @@
 								data-currency="JPY"
 								data-email="{{ Auth::user()->email }}">
 							</script>
+						{{ Form::hidden('address', $delivery->md5) }}
+						{{ Form::hidden('carts', $carts) }}
 						</form>
 						</body>
 
